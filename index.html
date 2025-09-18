@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Your Beauty — compact fit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Forum&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brown: #4C2F27;
+            --rose: #DCC7C1;
+            --header-h: 72px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden
+        }
+
+        body {
+            font-family: 'Forum',serif;
+            letter-spacing: -.02em
+        }
+
+        .screen {
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+            grid-template-rows: var(--header-h) 1fr
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, var(--brown) 0 50%, var(--rose) 50% 100%);
+            position: relative;
+            z-index: 2;
+            height: var(--header-h);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .head {
+            width: 90%;
+            max-width: 1400px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .logo {
+            font-size: 34px;
+            color: #F5EAE6;
+            text-decoration: none
+        }
+
+
+        /* ===== NAV ===== */
+        nav {
+            display: flex;
+            gap: 50px;
+            margin-left: 30px;
+        }
+
+            /* ссылка — позиционируем, чтобы ::after сидел ВНУТРИ неё */
+            nav a {
+                position: relative; /* ВАЖНО */
+                display: inline-block; /* чтобы width:100% у ::after работал от текста */
+                font-size: 22px;
+                text-decoration: none;
+                opacity: 1;
+            }
+
+                /* тонкая линия при ховере/фокусе, ровно под ссылкой */
+                nav a::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: -6px;
+                    width: 100%;
+                    height: 2px;
+                    background: currentColor; /* цвет берём из paintNav() */
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    opacity: 0;
+                    transition: transform .18s ease, opacity .18s ease;
+                }
+
+                nav a:hover,
+                nav a:focus-visible {
+                    opacity: 1;
+                }
+
+                    nav a:hover::after,
+                    nav a:focus-visible::after {
+                        transform: scaleX(1);
+                        opacity: .95;
+                    }
+
+        /* ===== ICONS (минимализм) ===== */
+        .icons {
+            display: flex;
+            gap: 18px;
+        }
+
+        .icon {
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            background: transparent; /* без кружка */
+            border: none; /* убрали рамку-кольцо */
+            color: inherit;
+            padding: 0;
+            cursor: pointer;
+            transition: transform .12s ease, opacity .15s ease;
+        }
+
+            .icon svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            /* лёгкий отклик */
+            .icon:hover {
+                transform: translateY(-1px);
+                opacity: .9;
+            }
+
+            .icon:active {
+                transform: translateY(0);
+                opacity: .85;
+            }
+
+
+       
+
+        /* 50/50 фон */
+        :root {
+            --gutter: 40px; /* единый отступ от краев окна (подбери 32–56) */
+        }
+
+        /* было .hero {...} */
+        .hero {
+            position: relative;
+            width: 100%;
+            background: linear-gradient(90deg, var(--brown) 0 50%, var(--rose) 50% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            /* НОВОЕ: рамка-отступ вокруг всего контента */
+            box-sizing: border-box;
+            padding: var(--gutter);
+            /* чтобы и на iOS с «чёлкой» выглядело ок:
+  padding-left:  max(var(--gutter), env(safe-area-inset-left));
+  padding-right: max(var(--gutter), env(safe-area-inset-right));
+  padding-top:   var(--gutter);
+  padding-bottom:var(--gutter);
+  */
+        }
+
+
+        /* ===== CANVAS 1540×700 (вписывается скейлом) ===== */
+        .canvas-wrap {
+            position: relative;
+            width: 1540px;
+            height: 700px;
+            transform-origin: top left;
+        }
+
+        .canvas {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: 835px 740px;
+        }
+
+        /* Левая колонка — центрируем содержимое по горизонтали */
+        .left {
+            color: #EEDDD8;
+            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .left h1 {
+                margin: 50px 0 50px -24px;
+                font-weight: 400;
+                font-size: 104px;
+                line-height: 78px;
+            }
+            /* текст под фон 50/50: слева светлый, правее середины экрана — коричневый */
+            .left h1 {
+                color: transparent;
+                -webkit-text-fill-color: transparent;
+                -webkit-background-clip: text;
+                background-clip: text;
+                /* чёткая вертикальная граница ровно по центру окна */
+                background-image: linear-gradient( to right, #EEDDD8 0, #EEDDD8 54vw, #4C2F27 46vw, #4C2F27 100vw );
+                background-attachment: fixed;
+            }
+
+
+        .photos-left {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center
+        }
+
+        .ph {
+            background: #222;
+            border: 1px solid rgba(0,0,0,.45);
+            overflow: hidden
+        }
+
+            .ph img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover
+            }
+
+        /* фото чуть шире, ближе к центру */
+        .ph-sm {
+            width: 320px;
+            height: 440px
+        }
+
+        .ph-lg {
+            width: 480px;
+            height: 520px
+        }
+
+        /* Правая колонка — центрируем элементы */
+        .right {
+            color: var(--brown);
+            padding: 0 10px 6px 120px;
+            display: grid;
+            grid-template-rows: auto auto auto auto;
+            row-gap: 16px;
+        }
+
+            .right h2 {
+                margin: 0;
+                font-weight: 400;
+                font-size: 120px;
+                line-height: 124px;
+            }
+
+        .ph-mini {
+            width: 520px;
+            height: 280px;
+            background: #222;
+            border: 1px solid rgba(0,0,0,.45);
+            overflow: hidden
+        }
+
+        .text {
+            width: 600px;
+            font-size: 26px;
+            line-height: 30px;
+            margin: 2px 0px;
+        }
+
+        .btn {
+            width: 270px;
+            height: 75px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--brown);
+            color: var(--rose);
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        @media (max-width:1024px) {
+            .canvas {
+                grid-template-columns: 1fr;
+                row-gap: 24px
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="screen">
+        <header>
+            <div class="head">
+                <a class="logo" href="#" id="logo">YOUR BEAUTY</a>
+                <nav id="nav">
+                    <a href="#">Главная</a><a href="#">О нас</a><a href="#">Серьги</a>
+                    <a href="#">Цепочки</a><a href="#">Браслеты</a><a href="#">Доставка и оплата</a>
+                </nav>
+                <div class="icons" id="icons">
+                    <!-- Корзина -->
+                    <button class="icon" aria-label="Корзина" title="Корзина">
+                        <svg viewBox="0 0 29 29" width="24" height="24" fill="none" aria-hidden="true">
+                            <path d="M4.97917 4.35097H24.5783C26.5691 4.35097 27.9749 6.30287 27.3453 8.19299L24.9148 15.4904C24.5178 16.6823 23.4032 17.4863 22.1478 17.4863H6.85417M4.97917 4.35097L4.92026 3.93817C4.71499 2.50014 3.48439 1.43201 2.03291 1.43201H0.916687M4.97917 4.35097L6.85417 17.4863M6.85417 17.4863L7.12145 19.3586C7.32672 20.7966 8.55732 21.8648 10.0088 21.8648H22.7917M22.7917 21.8648C21.1809 21.8648 19.875 23.1716 19.875 24.7837C19.875 26.3958 21.1809 27.7027 22.7917 27.7027C24.4025 27.7027 25.7084 26.3958 25.7084 24.7837C25.7084 23.1716 24.4025 21.8648 22.7917 21.8648ZM14.0417 24.7837C14.0417 26.3958 12.7359 27.7027 11.125 27.7027C9.51419 27.7027 8.20835 26.3958 8.20835 24.7837C8.20835 23.1716 9.51419 21.8648 11.125 21.8648C12.7359 21.8648 14.0417 23.1716 14.0417 24.7837Z"
+                                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+
+                    <!-- Профиль -->
+                    <button class="icon" aria-label="Профиль" title="Профиль">
+                        <svg viewBox="0 0 29 29" width="24" height="24" fill="none" aria-hidden="true">
+                            <circle cx="14.5" cy="9.5" r="4.5" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M4 24c1.8-4.7 7-6 10.5-6s8.7 1.3 10.5 6"
+                                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero" id="hero">
+            <div class="canvas-wrap" id="canvas">
+                <div class="canvas">
+                    <div class="left">
+                        <h1>НАШИ УКРАШЕНИЯ</h1>
+                        <div class="photos-left">
+                            <figure class="ph ph-sm"><img src="1.jpg" alt=""></figure>
+                            <figure class="ph ph-lg"><img src="2.jpg" alt=""></figure>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h2>ТВОЯ<br>КРАСОТА</h2>
+                        <figure class="ph ph-mini"><img src="3.jpg" alt=""></figure>
+                        <p class="text">Несем красоту в массы и знаем, как раскрыть твою.</p>
+                        <a class="btn" href="#">В КАТАЛОГ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Вписываем холст 1540×700 и центрируем
+        (function () {
+            const header = document.querySelector('header');
+            const hero = document.getElementById('hero');
+            const canvas = document.getElementById('canvas');
+            const nav = document.getElementById('nav');
+            const logo = document.getElementById('logo');
+            const icons = document.getElementById('icons');
+
+            const CW = 1540, CH = 700;
+            // было SAFE_Y = 90; — делаем меньше, чтобы контент мог быть повыше
+            const SAFE_Y = 70;      // нижний безопасный зазор
+            const TOP_SHIFT = -10;    // сдвиг всего холста вверх (подберите -16…-32)
+
+            function fit() {
+                // высота секции под шапкой
+                const availH = Math.max(560, window.innerHeight - header.offsetHeight);
+                hero.style.height = availH + 'px';
+
+                // размеры внутренней области (с учётом padding у .hero)
+                const cs = getComputedStyle(hero);
+                const padL = parseFloat(cs.paddingLeft) || 0;
+                const padR = parseFloat(cs.paddingRight) || 0;
+                const padT = parseFloat(cs.paddingTop) || 0;
+                const padB = parseFloat(cs.paddingBottom) || 0;
+
+                const innerW = hero.clientWidth - (padL + padR);
+                const innerH = hero.clientHeight - (padT + padB);
+
+                // коэффициент масштабирования холста 1540×700
+                const s = Math.min(innerW / CW, innerH / CH);
+                canvas.style.transform = 'scale(' + s + ')';
+
+                // центрируем холст внутри "внутренней области" и учитываем паддинги
+                const usedW = CW * s, usedH = CH * s;
+                canvas.style.position = 'absolute';
+                canvas.style.left = (padL + (innerW - usedW) / 2) + 'px';
+                canvas.style.top = (padT + (innerH - usedH) / 2) + 'px';
+
+                paintNav();
+            }
+
+
+            function paintNav() {
+                const mid = window.innerWidth / 2;
+                logo.style.color = '#F5EAE6';
+                Array.from(nav.children).forEach(a => {
+                    const r = a.getBoundingClientRect(), cx = r.left + r.width / 2;
+                    a.style.color = (cx < mid) ? '#DCC7C1' : '#4C2F27';
+                });
+                Array.from(icons.children).forEach(ic => {
+                    const r = ic.getBoundingClientRect(), cx = r.left + r.width / 2;
+                    const col = (cx < mid) ? '#DCC7C1' : '#4C2F27';
+                    ic.style.color = col; ic.style.borderColor = col;
+                });
+            }
+
+            addEventListener('resize', fit);
+            addEventListener('DOMContentLoaded', fit);
+        })();
+    </script>
+</body>
+</html>
