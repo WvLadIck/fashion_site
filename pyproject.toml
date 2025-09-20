@@ -9,6 +9,10 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = {extras = ["all"], version = "^0.116.1"}
+sqlalchemy = "^2.0.43"
+pyjwt = "^2.10.1"
+asyncpg = "^0.30.0"
+alembic = "^1.16.5"
 
 
 [build-system]
