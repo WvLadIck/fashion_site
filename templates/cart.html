@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block html_class %}no-scrollbar{% endblock %}
+
+{% load static %}
+
+{% block title %}Корзина — Your Beauty{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="cart">
+  <div class="container">
+    <div class="cart-top">
+      <h1>КОРЗИНА</h1>
+      {% if items %}
+      <div class="cart-summary">
+        <div class="total">Итого: <b><span id="js-cart-total">{{ total|floatformat:0 }}</span> руб</b></div>
+        <a href="{% url 'checkout' %}" class="btn btn-outline btn-lg">Оформить заказ</a>
+      </div>
+      {% endif %}
+    </div>
+
+    {% if items %}
+      <div class="cart-wrap">
+        <div class="cart-grid">
+          {% for row in items %}
+            <article class="cart-item" data-slug="{{ row.item.slug }}" data-price="{{ row.item.price }}">
+              <figure class="cart-img">
+                <img src="{{ row.item.image.url }}" alt="{{ row.item.name }}">
+              </figure>
+
+              <div class="cart-meta">
+                <h3 class="cart-name">{{ row.item.name }}</h3>
+                <div class="cart-price">{{ row.item.price|floatformat:0 }} руб</div>
+
+                {# кнопки без форм — всё делает JS #}
+                <div class="qty">
+                  <button class="qty-btn js-dec" data-slug="{{ row.item.slug }}" type="button">−</button>
+                  <span class="qty-val" id="qty-{{ row.item.slug }}">{{ row.qty }}</span>
+                  <button class="qty-btn js-inc" data-slug="{{ row.item.slug }}" type="button">+</button>
+                </div>
+
+                <button class="remove js-remove" data-slug="{{ row.item.slug }}" type="button" aria-label="Удалить">×</button>
+              </div>
+            </article>
+
+          {% endfor %}
+        </div>
+      </div>
+
+    {% else %}
+      <p class="cart-empty">Корзина пуста.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

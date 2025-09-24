@@ -1,0 +1,90 @@
+:root{
+  --brown:#4C2F27;
+  --rose:#DCC7C1;
+}
+
+body {
+  background: var(--brown);
+}
+
+.yb-header {
+  background: var(--brown);
+  border-bottom: 1px solid #DCC7C1;
+}
+.yb-nav a {
+  color: var(--rose) !important;
+}
+.logo {
+    color: var(--rose) !important;
+}
+.checkout{
+  background: var(--brown);
+  color: #EDE1DC;
+  padding: clamp(16px, 3vw, 32px) 0 64px;
+}
+
+.checkout .container{ max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+.checkout-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 3vw, 32px);
+}
+
+.panel{
+  border: 1px solid rgba(237,225,220,.35);
+  border-radius: 8px;
+  padding: clamp(16px, 2.5vw, 28px);
+  background: rgba(76,47,39,.35);
+  backdrop-filter: blur(1px);
+}
+
+.title{
+  font-family: 'Forum', serif;
+  font-size: clamp(28px, 3.2vw, 48px);
+  margin: 0 0 16px;
+  color: #EDE1DC;
+}
+
+.btn-lg{
+  margin-top: 16px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid #EDE1DC;
+  color: #EDE1DC;
+  font-size: clamp(18px, 2vw, 28px);
+}
+.order-form .field{
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+  padding: 14px 18px;
+  background: transparent;
+  border: 1px solid rgba(237,225,220,.45);
+  border-radius: 999px;
+  color: #F5EAE6;
+  outline: none;
+}
+
+.order-lines{ list-style: none; margin: 0; padding: 8px 0; }
+.line{
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 8px;
+}
+.thumb{ width: 72px; height: 72px; object-fit: cover; border-radius: 4px; }
+.name{ color: #EDE1DC; }
+.qty{ color: #EDE1DC; opacity: .9; }
+
+.order-total{
+  margin-top: 12px;
+  font-size: clamp(18px, 2.2vw, 28px);
+  color: #EDE1DC;
+}
+
+@media (max-width: 900px){
+  .checkout-grid{ grid-template-columns: 1fr; }
+}
