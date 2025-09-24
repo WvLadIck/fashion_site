@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru" class="{% block html_class %}{% endblock %}">
+<head>
+  {% load static %}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Your Beauty{% endblock %}</title>
+
+  <!-- Шрифт -->
+  <link href="https://fonts.googleapis.com/css2?family=Forum&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+
+  <!-- Базовая тема -->
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <!-- Шапка (50/50 фон) -->
+  <header class="yb-header">
+    <div class="head">
+      <a class="logo" href="/" id="logo">YOUR BEAUTY</a>
+      <nav id="nav" class="yb-nav">
+        <!-- Примеры ссылок — подменишь на реальные категории/страницы -->
+        <a href="{% url 'about' %}">О&nbsp;нас</a>
+        <a href="{% url 'items_list' %}">Каталог</a>
+        <a href="{% url 'items_list' %}?cat=sergi"
+           class="{% if current_category and current_category.slug == 'sergi' %}is-active{% endif %}">
+          Серьги
+        </a>
+
+        <a href="{% url 'items_list' %}?cat=kolca"
+           class="{% if current_category and current_category.slug == 'kolca' %}is-active{% endif %}">
+          Кольца
+        </a>
+
+        <a href="{% url 'items_list' %}?cat=braslety"
+           class="{% if current_category and current_category.slug == 'braslety' %}is-active{% endif %}">
+          Браслеты
+        </a>
+
+        <a href="{% url 'items_list' %}?cat=komplekty"
+           class="{% if current_category and current_category.slug == 'komplekty' %}is-active{% endif %}">
+          Комплекты
+        </a>
+
+      </nav>
+
+
+      <!-- Иконки -->
+      <div class="icons" id="icons">
+        {% url 'cart_detail' as cart_url %}
+        <!-- Корзина -->
+        <a class="icon cart-link" href="{% url 'cart_detail' %}" aria-label="Корзина" title="Корзина">
+          <svg viewBox="0 0 29 29" aria-hidden="true">
+            <path d="M4.97917 4.35097H24.5783C26.5691 4.35097 27.9749 6.30287 27.3453 8.19299L24.9148 15.4904C24.5178 16.6823 23.4032 17.4863 22.1478 17.4863H6.85417M4.97917 4.35097L4.92026 3.93817C4.71499 2.50014 3.48439 1.43201 2.03291 1.43201H0.916687M4.97917 4.35097L6.85417 17.4863M6.85417 17.4863L7.12145 19.3586C7.32672 20.7966 8.55732 21.8648 10.0088 21.8648H22.7917M22.7917 21.8648C21.1809 21.8648 19.875 23.1716 19.875 24.7837C19.875 26.3958 21.1809 27.7027 22.7917 27.7027C24.4025 27.7027 25.7084 26.3958 25.7084 24.7837C25.7084 23.1716 24.4025 21.8648 22.7917 21.8648ZM14.0417 24.7837C14.0417 26.3958 12.7359 27.7027 11.125 27.7027C9.51419 27.7027 8.20835 26.3958 8.20835 24.7837C8.20835 23.1716 9.51419 21.8648 11.125 21.8648C12.7359 21.8648 14.0417 23.1716 14.0417 24.7837Z"
+                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="cart-count" id="js-cart-count">
+            {{ cart_count|default:"0" }}
+          </span>
+
+        </a>
+
+        <!-- Профиль -->
+        <button class="icon" aria-label="Профиль" title="Профиль">
+          <svg viewBox="0 0 29 29" aria-hidden="true">
+            <circle cx="14.5" cy="9.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M4 24c1.8-4.7 7-6 10.5-6s8.7 1.3 10.5 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Контент страниц -->
+  <main id="page">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Скрипты -->
+  <script src="{% static 'js/main.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

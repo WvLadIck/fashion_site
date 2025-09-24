@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Your Beauty — главная{% endblock %}
+{% block body_class %}no-scroll-if-fit{% endblock %}
+{% block content %}
+<section class="hero" id="hero">
+  <div class="canvas-wrap" id="canvas">
+    <div class="canvas">
+      <div class="left">
+        <h1>НАШИ УКРАШЕНИЯ</h1>
+        <div class="photos-left">
+          <figure class="ph ph-sm"><img src="{% static 'img/home/1.jpg' %}" alt=""></figure>
+          <figure class="ph ph-lg"><img src="{% static 'img/home/2.jpg' %}" alt=""></figure>
+        </div>
+      </div>
+      <div class="right">
+        <h2>ТВОЯ<br>КРАСОТА</h2>
+        <figure class="ph ph-mini"><img src="{% static 'img/home/3.jpg' %}" alt=""></figure>
+        <p class="text">Несём красоту в массы и знаем, как раскрыть твою.</p>
+        <a class="btn" href="{% url 'items_list' %}">В КАТАЛОГ</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

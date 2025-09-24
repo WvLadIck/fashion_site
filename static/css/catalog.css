@@ -1,0 +1,115 @@
+:root{
+    --yb-brown: var(--brown, #4C2F27);
+    --yb-rose:  var(--rose,  #DCC7C1);
+    --yb-g:     var(--gutter, 40px);
+    --yb-br:    16px;
+  }
+ .cart h1{margin:0;font-weight:400;font-size:34px;line-height:2;color:var(--brown)}
+
+#page {
+        margin-top: 10px;
+}
+body {
+  background: var(--rose);
+}
+.yb-header {
+  background: var(--rose);
+  border-bottom: 1px solid #4C2F27;
+}
+.yb-nav a {
+  color: var(--brown) !important;
+}
+.logo {
+    color: var(--brown) !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;   /* IE/старый Edge */
+  scrollbar-width: none;      /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar { /* Chrome/Safari/Opera */
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* На всякий случай уберём горизонтальную */
+html, body { overflow-x: clip; }
+  /* ---------- Фильтры ---------- */
+  .filters{
+    display:flex; flex-wrap:wrap; gap:14px 18px; align-items:end;
+    padding:14px 16px;
+    background: color-mix(in oklab, var(--yb-rose) 86%, white 14%);
+    border:1px solid color-mix(in oklab, var(--yb-brown) 35%, transparent);
+    border-radius: calc(var(--yb-br) + 8px);
+    margin: 12px 0 var(--yb-g);
+  }
+  .filters label{
+    display:flex; flex-direction:column; gap:6px;
+    font-size:14px; color: color-mix(in oklab, var(--yb-brown) 85%, black);
+  }
+  .filters select,
+  .filters input[type="number"]{
+    appearance:none;
+    height:42px; min-width: 170px; padding: 0 12px;
+    font: inherit; color: var(--yb-brown);
+    background:#fff6f3;
+    border:1px solid color-mix(in oklab, var(--yb-brown) 30%, transparent);
+    border-radius: 10px;
+    outline:none;
+  }
+  .filters input[type="number"]{ min-width:120px; }
+  .filters button[type="submit"]{
+    height:44px; padding:0 18px; border-radius: 999px;
+    border:1px solid var(--yb-brown);
+    background: var(--yb-brown); color: var(--yb-rose);
+    font: inherit;
+    transition: .15s ease-in-out;
+    cursor:pointer;
+  }
+  .filters button[type="submit"]:hover{
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+  }
+
+  /* ---------- Сетка карточек ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+  }
+
+  /* ---------- Карточка ---------- */
+  .card{
+    display:flex; flex-direction:column;
+    border:1px solid color-mix(in oklab, var(--yb-brown) 35%, transparent);
+    background: color-mix(in oklab, var(--yb-rose) 90%, white 10%);
+    border-radius: 18px; overflow:hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,.05);
+  }
+  .card > img{
+    width:100%; height: 240px; object-fit: cover; display:block;
+    background:#eee;
+    transition: transform .25s ease;
+  }
+  .card:hover > img{ transform: scale(1.02); }
+
+  .card h3{ margin:14px 14px 4px; font-size:22px; color:var(--yb-brown); }
+  .card p{ margin:0 14px 12px; font-size:18px; color: color-mix(in oklab, var(--yb-brown) 90%, black); }
+
+  .card form{
+    display:flex; gap:10px; align-items:center;
+    padding: 12px 14px 16px;
+    margin-top:auto;
+  }
+  .card form input[type="number"]{
+    width:72px; height:40px; text-align:center;
+    border:1px solid color-mix(in oklab, var(--yb-brown) 30%, transparent);
+    border-radius:10px; background:#fff6f3; color:var(--yb-brown);
+    font:inherit;
+  }
+  .card form button{
+    height:40px; padding:0 14px; border-radius:999px;
+    border:1px solid var(--yb-brown);
+    background: var(--yb-brown); color: var(--yb-rose);
+    font:inherit; cursor:pointer; transition:.15s;
+  }
+  .card form button:hover{ filter:brightness(1.05); }

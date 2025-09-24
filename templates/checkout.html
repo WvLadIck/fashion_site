@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block html_class %}no-scrollbar{% endblock %}
+
+{% load static %}
+{% block title %}Оформление заказа — Your Beauty{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/checkout.css' %}">{% endblock %}
+
+{% block content %}
+<section class="checkout">
+  <div class="container">
+
+    <div class="checkout-grid">
+      <!-- Левая колонка: форма -->
+      <div class="panel">
+        <h1 class="title">Оформление заказа</h1>
+
+        <form class="order-form" method="post" action="#">
+          {% csrf_token %}
+          <input class="field" type="text" name="fio" placeholder="ФИО" required>
+          <input class="field" type="tel" name="phone" placeholder="Номер телефона" required>
+          <input class="field" type="email" name="email" placeholder="Электронная почта" required>
+          <input class="field" type="text" name="address" placeholder="Адрес доставки" required>
+
+          <button class="btn-lg" type="submit">Заказать</button>
+        </form>
+      </div>
+
+      <!-- Правая колонка: состав заказа -->
+      <div class="panel">
+        <h2 class="title">Информация о заказе</h2>
+
+        <ul class="order-lines">
+          {% for row in items %}
+            <li class="line">
+              <img class="thumb" src="{{ row.item.image.url }}" alt="{{ row.item.name }}">
+              <div class="name">{{ row.item.name }} {{ row.item.price|floatformat:0 }} руб</div>
+              <div class="qty">{{ row.qty }} шт</div>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <div class="order-total">
+          Итого: <b>{{ total|floatformat:0 }} руб</b>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

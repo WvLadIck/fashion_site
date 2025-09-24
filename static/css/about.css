@@ -1,0 +1,146 @@
+/* static/css/about.css */
+:root{
+  /* опираемся на твои переменные темы */
+  --brown:#4C2F27;
+  --rose:#DCC7C1;
+  --header-h:72px;
+}
+
+.yb-header{
+  background: none;
+ }
+#page{
+    padding: 0px var(--gutter) 0 0 0 !important;
+}
+
+/* Левая колонка: центр по вертикали и горизонтали */
+.about-left{
+  background: var(--brown);
+  color: #F5EAE6;
+  display: flex;
+  align-items: center;                  /* вертикально по центру */
+  justify-content: center;              /* горизонтально по центру */
+  padding: 15px;
+}
+
+/* Внутренний контейнер — фиксируем ширину и центрируем текст */
+.about-inner{
+  width: min(760px, 90%);
+  text-align: center;                   /* всё содержимое по центру */
+}
+
+/* Заголовок по центру */
+.about-title{
+  font-family: 'Forum', serif;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  line-height: 1.15;
+  font-size: 30px;
+  color: #EDE1DC;
+  margin: 0 0 24px 0;
+  text-align: center;
+  font-weight: none;
+}
+
+/* Фото: строго по центру, без тени */
+.about-photo{
+margin: 20px 130px;
+align-items: center;                  /* вертикально по центру */
+  justify-content: center;
+  box-shadow: none;                     /* убрали тень */
+  overflow: hidden;
+}
+.about-photo img{
+  display: block;
+      width: 325px;
+    height: 412px;
+    object-fit: cover;                         /* без фиксированной высоты */
+}
+
+/* Текстовый абзац — по центру и с комфортной шириной */
+.about-text{
+  color: #E9D7D0;
+  font-size: 22px;
+  margin: 0 auto;
+  max-width: 60ch;                       /* чтобы строки не были слишком длинными */
+}
+
+.about-text-1{
+  color: #E9D7D0;
+  font-size: 30px;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 60ch;                       /* чтобы строки не были слишком длинными */
+}
+
+
+
+
+/* 1) Ломаем схлопывание и убираем зазор под шапкой */
+.about-hero{
+  min-height: calc(100svh - var(--header-h));
+  background: var(--rose);
+  display: flow-root;            /* <-- предотвращает margin-collapse */
+  padding-top: 0;                /* на всякий случай */
+}
+
+/* заголовок без верхнего margin, чтобы ничего не «толкало» секцию */
+.about-title{ margin-top: 0; }
+.about-hero{ display: flow-root; }
+
+/* 2) Правая половина — сплошной фон под шапкой, без внутренних зазоров */
+.about-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100svh - var(--header-h));
+}
+
+.about-right{
+  position: relative;
+  background: #f6f2ef;          /* резервный цвет, когда картинка грузится */
+  margin: 0;
+  padding: 0;                    /* исключаем внутренние отступы */
+  z-index: 0;                    /* ниже шапки (у шапки z-index выше) */
+}
+
+/* Картинка как полноценный фон */
+.about-cover{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;             /* заполняет всю колонку без «щелей» */
+  display: block;
+}
+
+/* адаптив (как было) */
+@media (max-width: 900px){
+  .about-grid{ grid-template-columns: 1fr; }
+  .about-right{ height: 46vh; }
+  .about-hero{ min-height: auto; }
+}
+
+
+:root{
+  --brown:#4C2F27;
+  --rose:#DCC7C1;
+  --header-h:72px;
+}
+
+
+
+/* Правая половина: фиксированное покрытие ВЕСЕЙ правой части окна */
+.page-about .about-right{ position: relative; z-index: -1; }
+.page-about .about-right{
+  position: fixed;                               /* ключевой момент */
+  top: 0; right: 0;
+  width: 50vw; height: 100svh;
+  object-fit: cover;
+  display: block;
+  z-index: 0;                                    /* ниже шапки и левого блока */
+  pointer-events: none;                          /* чтобы клики не ловила */
+}
+
+
+
+

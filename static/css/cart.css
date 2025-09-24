@@ -1,0 +1,51 @@
+/* Корзина */
+.cart{background:var(--rose);padding:20px 0 80px}
+.cart .container{width:90%;max-width:1400px;margin:0 auto}
+.cart-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.cart h1{margin:0;font-weight:400;font-size:34px;line-height:2;color:var(--brown)}
+.btn.btn-outline{background:transparent;color:var(--brown);border:1px solid currentColor;border-radius:40px;text-decoration:none}
+.btn.btn-lg{height:70px;padding:0 28px;font-size:28px;display:inline-flex;align-items:center;justify-content:center}
+body {
+  background: var(--rose);
+}
+.total {
+    font-size: 30px;
+}
+.yb-header {
+  background: var(--rose);
+  border-bottom: 1px solid #4C2F27;
+}
+.yb-nav a {
+  color: var(--brown) !important;
+}
+.logo {
+    color: var(--brown) !important;
+}
+/* рамка блока с карточками */
+.cart-wrap{border:1px solid rgba(76,47,39,.35);padding:24px}
+
+/* сетка карточек */
+.cart-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px 28px}
+
+/* карточка */
+.cart-item{position:relative}
+.cart-img{aspect-ratio:1/1;background:#222;border:1px solid rgba(0,0,0,.45);overflow:hidden}
+.cart-img img{width:100%;height:100%;object-fit:cover}
+.cart-meta{display:grid;grid-template-columns:1fr auto;align-items:end;gap:8px 18px;padding:14px 6px 0;color:var(--brown)}
+.cart-name{margin:0;font-weight:400;font-size:32px}
+.cart-price{font-size:26px;opacity:.9}
+
+/* счётчик */
+.qty{grid-column:2;justify-self:end;display:inline-flex;gap:10px;align-items:center;border:1px solid rgba(76,47,39,.4);border-radius:30px;padding:8px 14px}
+.qty-btn{border:0;background:transparent;font-size:28px;line-height:1;color:var(--brown);cursor:pointer}
+.qty-val{font-size:22px;min-width:20px;text-align:center}
+
+/* удалить */
+.remove{position:absolute;top:10px;right:10px;border:0;background:transparent;font-size:28px;line-height:1;opacity:.55;cursor:pointer}
+
+/* подвал корзины */
+.cart-summary{display:flex;justify-content:flex-end;align-items:center;gap:22px;margin-top:18px;color:var(--brown)}
+.cart-empty{color:var(--brown);font-size:22px}
+
+/* важное: чтобы не было «белой полосы» вокруг контента */
+#page{padding:0}

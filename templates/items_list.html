@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block html_class %}no-scrollbar{% endblock %}
+
+{% load static %}
+{% block title %}Каталог — Your Beauty{% endblock %}
+
+{# только стили; верстку не ломаю #}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/catalog.css' %}">{% endblock %}
+{% block body_class %}no-scrollbar{% endblock %}
+{% block content %}
+
+<section class="cart">
+  <h1>КАТАЛОГ</h1>
+</section>
+
+
+<form method="get" class="filters">
+  <label class="f">
+    <span>Категория:</span>
+    <select name="cat">
+      <option value="">— все —</option>
+      {% for c in categories %}
+        <option value="{{ c.slug }}"
+                {% if current_category and current_category.slug == c.slug %}selected{% endif %}>
+          {{ c.name }}
+        </option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label class="f">
+    <span>Цена от:</span>
+    <input type="number" name="price_min" value="{{ selected.price_min }}">
+  </label>
+
+  <label class="f">
+    <span>до:</span>
+    <input type="number" name="price_max" value="{{ selected.price_max }}">
+  </label>
+
+  <label class="f">
+    <span>Сортировка:</span>
+    <select name="order">
+      <option value="">— без сортировки —</option>
+      <option value="price_asc"  {% if selected.order == "price_asc" %}selected{% endif %}>Цена ↑</option>
+      <option value="price_desc" {% if selected.order == "price_desc" %}selected{% endif %}>Цена ↓</option>
+    </select>
+  </label>
+
+  <button type="submit">Фильтровать</button>
+</form>
+
+<div class="grid">
+  {% for item in items %}
+    <article class="card">
+      {% if item.image %}
+        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+      {% else %}
+        <img src="{% static 'img/placeholder.jpg' %}" alt="{{ item.name }}">
+      {% endif %}
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.price|floatformat:0 }} ₽</p>
+
+      {# экшен не трогаю — как у вас #}
+      <form class="js-cart-form" method="post" action="{% url 'add_to_cart' item.slug %}">
+        {% csrf_token %}
+        <input type="number" name="quantity" value="1" min="1">
+        <button type="submit" class="js-add-to-cart" data-slug="{{ item.slug }}">Добавить в корзину</button>
+      </form>
+
+    </article>
+  {% empty %}
+    <p>Ничего не найдено.</p>
+  {% endfor %}
+</div>
+{% endblock %}

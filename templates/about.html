@@ -1,0 +1,36 @@
+{# templates/about.html #}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}О нас — Your Beauty{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/about.css' %}">{% endblock %}
+{% block body_class %}page-about{% endblock %}
+
+{% block content %}
+<section class="about-hero" id="hero">
+  <div class="about-grid">
+    <div class="about-left">
+      <div class="about-inner">
+        <p class="about-text-1">
+          МЫ СОЗДАЕМ ДЛЯ ВАС КРАСОТУ.
+          ЭТО НАШЕ ПРИЗВАНИЕ И ИСТОЧНИК ВДОХНОВЕНИЯ
+        </p>
+
+        <figure class="about-photo">
+          <img src="{% static 'img/about/left.jpg' %}" alt="Украшения Your Beauty">
+        </figure>
+
+        <p class="about-text">
+          Наши украшения — это не просто предметы, украшающие вас. Они являются настоящим произведением
+          искусства. Каждое изделие сделано с любовью и тщательной проработкой деталей.
+        </p>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <img class="about-cover" src="{% static 'img/about/right.jpg' %}" alt="">
+    </div>
+
+  </div>
+</section>
+{% endblock %}
