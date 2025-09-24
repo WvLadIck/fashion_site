@@ -37,7 +37,6 @@ services:
       - "8000:8000"
     volumes:
       - ./media:/app/media          # чтобы медиа жили на диске
-      - ./staticfiles:/app/staticfiles
 
 volumes:
   pgdata:
